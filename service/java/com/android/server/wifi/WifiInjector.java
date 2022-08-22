@@ -786,6 +786,11 @@ public class WifiInjector {
         return mIpMemoryStore;
     }
 
+    @NonNull
+    public WifiKeyStore getWifiKeyStore() {
+        return mWifiKeyStore;
+    }
+
     public HostapdHal getHostapdHal() {
         return mHostapdHal;
     }

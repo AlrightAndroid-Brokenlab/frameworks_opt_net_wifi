@@ -3656,8 +3656,7 @@ public class WifiServiceImplTest {
         mWifiServiceImpl.mClientModeImplChannel = mAsyncChannel;
         when(mClientModeImpl.syncGetConfiguredNetworks(anyInt(), any(), anyInt()))
                 .thenReturn(Arrays.asList(openNetwork, eapNetwork));
-        when(mClientModeImpl.syncGetPasspointConfigs(any(), anyBoolean()))
-                .thenReturn(Arrays.asList(config));
+        when(mClientModeImpl.syncGetPasspointConfigs(any())).thenReturn(Arrays.asList(config));
 
         mWifiServiceImpl.factoryReset(TEST_PACKAGE_NAME);
         mLooper.dispatchAll();
@@ -3665,7 +3664,7 @@ public class WifiServiceImplTest {
         verify(mClientModeImpl).syncRemoveNetwork(mAsyncChannel, openNetwork.networkId);
         verify(mClientModeImpl).syncRemoveNetwork(mAsyncChannel, eapNetwork.networkId);
         verify(mWifiKeyStore).removeKeys(eapNetwork.enterpriseConfig, true);
-        verify(mClientModeImpl).syncRemovePasspointConfig(mAsyncChannel, true, fqdn);
+        verify(mClientModeImpl).syncRemovePasspointConfig(mAsyncChannel, fqdn);
         verify(mWifiConfigManager).clearDeletedEphemeralNetworks();
         verify(mClientModeImpl).clearNetworkRequestUserApprovedAccessPoints();
         verify(mWifiNetworkSuggestionsManager).clear();
